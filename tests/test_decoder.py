@@ -6,6 +6,7 @@ import torch.nn as nn
 
 from src.decoder import TransformerDecoderLayer, TransformerDecoder
 
+
 @pytest.mark.order(7)
 def test_transformer_decoder_layer_output_shape():
     """Test the output shape of TransformerDecoderLayer's forward method."""
@@ -28,9 +29,12 @@ def test_transformer_decoder_layer_output_shape():
     output = decoder_layer(x, enc_output, tgt_mask)
 
     # Check output shape
-    assert output.shape == (batch_size, seq_len, d_model), (
-        f"Expected output shape {(batch_size, seq_len, d_model)}, got {output.shape}"
-    )
+    assert output.shape == (
+        batch_size,
+        seq_len,
+        d_model,
+    ), f"Expected output shape {(batch_size, seq_len, d_model)}, got {output.shape}"
+
 
 @pytest.mark.order(8)
 def test_transformer_decoder_output_shape():
@@ -56,13 +60,15 @@ def test_transformer_decoder_output_shape():
         d_model,
         num_heads,
         intermediate_size,
-        num_layers
+        num_layers,
     )
 
     # Forward pass
     output = decoder(input_ids, enc_output)
 
     # Check output shape
-    assert output.shape == (batch_size, seq_len, d_model), (
-        f"Expected output shape {(batch_size, seq_len, d_model)}, got {output.shape}"
-    )
+    assert output.shape == (
+        batch_size,
+        seq_len,
+        d_model,
+    ), f"Expected output shape {(batch_size, seq_len, d_model)}, got {output.shape}"
